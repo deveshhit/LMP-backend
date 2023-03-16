@@ -1,5 +1,6 @@
 var express = require('express');
 const dotenv = require("dotenv");
+const cors = require("cors")
 dotenv.config();
 var app = express();
 const Port = process.env.PORT
@@ -9,8 +10,12 @@ var apisRouter = require('./routes/api');
 
 //Middleware
 app.use(express.json());
+app.use(cors())
 app.use(express.urlencoded({ extended: false }));
+app.use('/publicfiles',express.static(__dirname + '/publicfiles'))
 app.use('/api', apisRouter);
+
+
 
 
 //MongoDb Connection
